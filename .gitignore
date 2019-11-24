@@ -18,10 +18,12 @@ speed-measure-plugin.json
 /.idea
 .project
 .classpath
+.vscode/
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
+.prettierrc
 
 # IDE - VSCode
 .vscode/*

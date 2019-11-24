@@ -1,0 +1,27 @@
+@import "./../../../styles/base/bootstrap";
+@import "./../../../styles/base/include-media";
+
+:host {
+  display: block;
+
+  @include media("≥tablet") {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+
+  .city-card {
+    padding-left: map-get($spacers, 4);
+    padding-right: map-get($spacers, 4);
+  }
+
+  .card-holder {
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    height: 100%;
+    padding: map-get($spacers, 2);
+  }
+}

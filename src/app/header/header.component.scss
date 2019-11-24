@@ -1,0 +1,129 @@
+@import "./../../styles/base/bootstrap";
+@import "./../../styles/base/include-media";
+
+:host {
+  display: block;
+
+  .header {
+    position: relative;
+    padding-left: map-get($spacers, 3);
+    padding-right: map-get($spacers, 3);
+    border-bottom: 1px solid $cyan;
+
+    &--light {
+      background-color: #fff;
+    }
+  }
+
+  .logo {
+    &-link {
+      display: flex;
+      align-items: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    &-image {
+      width: 40px;
+      min-width: 40px;
+      margin-right: 5px;
+    }
+
+    &-title {
+      font-size: 1.4rem;
+      margin-bottom: 0;
+      line-height: 1;
+      color: $gray-900;
+
+      span {
+        display: block;
+        font-size: 0.8rem;
+        font-style: italic;
+        color: $cyan;
+        font-weight: bold;
+      }
+    }
+  }
+
+  nav {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s;
+
+    @include media("≥tablet") {
+      position: static;
+      height: 100%;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &.open {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .menu-bar {
+    display: block;
+    font-size: 2rem;
+    color: $cyan;
+
+    @include media("≥tablet") {
+      display: none;
+    }
+  }
+
+  .main-menubar {
+    .menu-list {
+      margin-bottom: 0;
+      height: 100%;
+    }
+
+    .nav-item {
+      &.active {
+        .nav-link {
+          color: $cyan;
+          @include media("≥tablet") {
+            &::after {
+              content: "";
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              height: 2px;
+              background-color: $cyan;
+            }
+          }
+        }
+      }
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: map-get($spacers, 3);
+      text-transform: uppercase;
+      font-weight: 600;
+      height: 100%;
+      background-color: $white;
+      border-bottom: 1px solid $cyan;
+
+      @include media("≥tablet") {
+        border-bottom: none;
+      }
+
+      @include media("≥desktop") {
+        &:hover {
+          color: $cyan;
+        }
+      }
+    }
+  }
+}

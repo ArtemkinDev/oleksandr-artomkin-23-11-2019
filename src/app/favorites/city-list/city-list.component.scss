@@ -1,0 +1,14 @@
+@import "./../../../styles/base/bootstrap";
+@import "./../../../styles/base/include-media";
+
+:host {
+  display: block;
+  .city-list {
+    display: block;
+
+    @include media("≥tablet") {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

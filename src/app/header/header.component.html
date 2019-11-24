@@ -1,0 +1,35 @@
+<header class="header header--light">
+    <div class="header-wrap">
+        <div class="header-top d-flex justify-content-between align-items-stretch">
+            <div class="logo">
+                <a [routerLink]="['/']" class="logo-link">
+                    <img src="./../../assets/images/logo.svg" alt="Herolo weather" class="logo-image" />
+                    <h2 class="logo-title">Herolo <span>weather</span></h2>
+                </a>
+            </div>
+            <div class="main-menubar d-flex align-items-center">
+                <nav [ngClass]="{ open: showMenu }">
+                    <ul class="list-unstyled menu-list d-md-flex">
+                        <li
+                            *ngFor="let item of menuItems"
+                            routerLinkActive="active"
+                            [routerLinkActiveOptions]="{
+                                exact: item.exact
+                            }"
+                            class="nav-item"
+                        >
+                            <a class="nav-link" [routerLink]="['/' + item.path]" [ngSwitch]="item.path">
+                                <ng-template ngSwitchCase="settings"><i class="fa fa-cog"></i></ng-template>
+                                <ng-template ngSwitchCase="">Home</ng-template>
+                                <ng-template ngSwitchDefault>{{ item.path }}</ng-template>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="menu-bar" (click)="toggleMenu()">
+                    <i class="fa fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

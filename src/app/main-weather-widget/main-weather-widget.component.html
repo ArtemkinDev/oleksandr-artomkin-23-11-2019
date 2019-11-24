@@ -1,0 +1,56 @@
+<div class="main-weather-widget" *ngIf="currentConditionsIsLoaded">
+    <div class="container">
+        <div [class]="'weather-widget-holder bg--' + currentBg">
+            <div class="main-city">
+                <i
+                    class="fa fa-heart-o favorite-icon"
+                    [ngClass]="{ active: favoriteCity }"
+                    (click)="addToFavorite(currentConditions.locationKey)"
+                ></i>
+                <div class="current-info">
+                    <div class="image-holder">
+                        <img
+                            [src]="'./../assets/images/icons/' + currentConditions.weatherIcon + '.png'"
+                            [alt]="currentConditions.cityName"
+                        />
+                    </div>
+                    <div class="info-holder">
+                        <h3 class="city-name">{{ currentConditions.cityName }}</h3>
+                        <div class="city-temp">{{ currentConditions.temperature }}&deg;</div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-block">
+                <span class="content-text">{{ currentConditions.weatherText }}</span>
+            </div>
+            <div class="days-container" *ngIf="dailyForecastsIsLoaded">
+                <ul class="day-list list-unstyled d-sm-flex">
+                    <li class="day-item" *ngFor="let day of dailyForecasts">
+                        <div class="day-holder">
+                            <span class="day-name">{{ day.date }}</span>
+                            <span class="day-temp">{{ day.temperature }} &deg;</span>
+                            <ul class="list-unstyled d-flex day-icons-list">
+                                <li class="day-icons-item">
+                                    <span class="icons-name">Day</span>
+                                    <img
+                                        [src]="'./../assets/images/icons/' + day.dayIcon + '.png'"
+                                        alt="Day"
+                                        class="icons-img"
+                                    />
+                                </li>
+                                <li class="day-icons-item">
+                                    <span class="icons-name">Night</span>
+                                    <img
+                                        [src]="'./../assets/images/icons/' + day.nightIcon + '.png'"
+                                        alt="Night"
+                                        class="icons-img"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

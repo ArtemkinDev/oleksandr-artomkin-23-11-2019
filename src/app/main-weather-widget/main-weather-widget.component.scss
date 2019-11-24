@@ -1,0 +1,203 @@
+@import "./../../styles/base/bootstrap";
+@import "./../../styles/base/include-media";
+@import "./../../styles/components/animation";
+
+:host {
+  display: block;
+  flex-grow: 1;
+  animation: fade 0.25s ease-in-out;
+
+  .main-weather-widget {
+    height: 100%;
+  }
+
+  .container {
+    height: 100%;
+  }
+
+  .weather-widget-holder {
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: -2px 8px 40px rgba(0, 0, 0, 0.3);
+
+    &.bg {
+      &--smoke {
+        background-image: url("https://images.unsplash.com/photo-1475778057357-d35f37fa89dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+      }
+      &--clouds {
+        background-image: url("https://images.unsplash.com/photo-1511680321409-d92a85fc4f66?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80");
+      }
+      &--rain {
+        background-image: url("https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80");
+      }
+      &--clear {
+        background-image: url("https://images.unsplash.com/photo-1523733257207-0b1c3aafa441?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
+      }
+      &--mist {
+        background-image: url("https://images.unsplash.com/photo-1546340270-9908deb7b9a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1471&q=80");
+      }
+      &--default {
+        background-color: $cyan;
+      }
+    }
+  }
+
+  .main-city {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: $white;
+    padding: map-get($spacers, 4);
+    background-color: rgba(25, 80, 230, 0.2);
+
+    @include media("≥tablet") {
+      align-items: flex-start;
+    }
+  }
+
+  .favorite-icon {
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    font-size: 1rem;
+    cursor: pointer;
+
+    @include media("≥tablet") {
+      font-size: 2rem;
+      top: 20px;
+      right: 20px;
+    }
+
+    @include media("≥tablet") {
+      &:hover {
+        color: $white;
+        &::before {
+          content: "\f004";
+        }
+      }
+    }
+
+    &.active {
+      color: $white;
+      &::before {
+        content: "\f004";
+      }
+    }
+  }
+
+  .current-info {
+    display: flex;
+    align-items: center;
+
+    .image-holder {
+      min-width: 50px;
+      margin-right: 10px;
+
+      @include media("≥tablet") {
+        min-width: 100px;
+      }
+
+      img {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    .city-temp {
+      font-size: 1rem;
+
+      @include media("≥tablet") {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .content-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    background-color: rgba(75, 97, 158, 0.2);
+    padding: map-get($spacers, 4);
+  }
+
+  .content-text {
+    font-size: 2rem;
+    color: $white;
+
+    @include media("≥tablet") {
+      font-size: 5rem;
+    }
+  }
+
+  .days-container {
+    padding: map-get($spacers, 1);
+    background-color: rgba(25, 80, 230, 0.2);
+
+    @include media("≥tablet") {
+      padding: map-get($spacers, 4);
+    }
+  }
+
+  .day-list {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    @include media("≥tablet") {
+      justify-content: space-between;
+    }
+  }
+
+  .day {
+    &-item {
+      padding-left: map-get($spacers, 1);
+      padding-right: map-get($spacers, 1);
+      width: 50%;
+
+      @include media("≥tablet") {
+        width: auto;
+        flex-grow: 1;
+        flex-basis: 0;
+        padding-left: map-get($spacers, 3);
+        padding-right: map-get($spacers, 3);
+      }
+    }
+
+    &-holder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: map-get($spacers, 2);
+      color: $white;
+    }
+  }
+
+  .day-icons-item {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px;
+  }
+  .day-name {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .icons-name {
+    margin-bottom: 5px;
+  }
+  .icons-img {
+    max-width: 100%;
+  }
+}

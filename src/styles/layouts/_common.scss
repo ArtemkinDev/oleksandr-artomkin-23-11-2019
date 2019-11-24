@@ -1,0 +1,24 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  min-width: $base-min-width;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content {
+  flex: 1 0 auto;
+  background-color: $gray-100;
+  padding-top: map-get($spacers, 5);
+  padding-bottom: map-get($spacers, 5);
+}
+.footer {
+  flex: 0 0 auto;
+}

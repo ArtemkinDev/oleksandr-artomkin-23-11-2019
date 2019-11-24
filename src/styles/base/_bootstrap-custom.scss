@@ -1,0 +1,231 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1200px
+);
+
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-starts-at-zero($grid-breakpoints);
+
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
+$white:  #fff;
+$gray-100: #f9f9f9;
+$gray-200: #e9e9e9;
+$gray-300: #d9d9d9;
+$gray-400: #c0c0c0;
+$gray-500: #adb5bd !default;
+$gray-600: #9b9b9b;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+
+$blue:    #4cb8db;
+$indigo:  #4a90e2;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #e3000b;
+$orange:  #ee7555;
+$yellow:  #ffc107 !default;
+$green:   #009c49;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+$colors: ();
+$colors: map-merge((
+  "blue":       $blue,
+  "indigo":     $indigo,
+  "purple":     $purple,
+  "pink":       $pink,
+  "red":        $red,
+  "orange":     $orange,
+  "yellow":     $yellow,
+  "green":      $green,
+  "teal":       $teal,
+  "cyan":       $cyan,
+  "white":      $white,
+  "gray":       $gray-600,
+  "gray-dark":  $gray-800
+), $colors);
+
+$primary:       $red;
+$secondary:     $gray-600;
+$success:       $green;
+$info:          $indigo;
+$warning:       $orange;
+$danger:        $red;
+$light:         $gray-100;
+$dark:          $gray-800 !default;
+
+$theme-colors: ();
+$theme-colors: map-merge((
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+), $theme-colors);
+
+$spacer: 1rem;
+$spacers: ();
+$spacers: map-merge((
+	0: 0,
+	1: ($spacer * .25),
+	2: ($spacer * .5),
+	3: $spacer,
+	4: ($spacer * 1.5),
+	5: ($spacer * 3),
+	6: ($spacer * 4.5),
+	7: ($spacer * 6),
+	8: ($spacer * 7.5),
+	9: ($spacer * 9),
+	10: ($spacer * 10.5)
+), $spacers);
+
+$base-min-width: 320px;
+
+// This is the default html and body font-size for the base rem value.
+$rem-base: 16px;
+
+// custom variables and override bootstrap variables
+
+$body-bg: #fff;
+$black:  #4a4a4a;
+
+/*
+* Font family
+*/
+$font-family-base: 'SourceSansPro', Arial, sans-serif;
+$elalba: 'elalba', Arial, sans-serif;
+
+$font-weight-light:           300;
+$font-weight-normal:          400;
+$font-weight-semibold:        600;
+$font-weight-bold:            700;
+$font-weight-bold:            900;
+
+/*
+* Body reset
+*/
+$line-height-base:  1.167;
+$body-bg: $white;
+$body-color: $black;
+$link-color: $red;
+
+// Style anchor elements.
+$link-color:                $black;
+$link-hover-decoration:     none;
+$link-hover-color:          $primary;
+
+// typography variables
+
+$h1-font-size:                $font-size-base * 1.875; //30px
+$h2-font-size:                $font-size-base * 1.75; // 28px
+$h3-font-size:                $font-size-base * 1.625; // 26px
+$h4-font-size:                $font-size-base * 1.25; //20px
+$h5-font-size:                $font-size-base * 1.125; // 18px
+$h6-font-size:                $font-size-base;
+
+$border-radius:               0;
+$border-color:                $gray-200;
+
+$blockquote-font-size: 1rem;
+
+// Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+$table-cell-padding:          1.15rem 1.25rem;
+$table-cell-padding-sm:       0.75rem 1rem;
+
+$table-bg:                    transparent;
+
+$table-border-width:          1px;
+$table-border-color:          $gray-300;
+
+$table-head-color:            $gray-300;
+
+// Breadcrumbs
+
+$breadcrumb-padding-y:              0rem;
+$breadcrumb-padding-x:              0rem;
+$breadcrumb-item-padding:           1rem;
+
+$breadcrumb-margin-bottom:          0rem;
+
+$breadcrumb-bg:                     transparent;
+$breadcrumb-divider-color:          $white;
+$breadcrumb-active-color:           $white;
+$breadcrumb-divider:                quote("\e91e");
+
+$breadcrumb-border-radius:          none;
+
+$h1-font-size:                $font-size-base * 1.875;
+
+// Buttons + Forms
+//
+// Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
+
+$input-btn-padding-y:         .5rem;
+$input-btn-padding-x:         .75rem;
+$input-btn-line-height:       $line-height-base;
+
+$input-btn-border-width:      $border-width;
+
+$input-padding-y:                       $input-btn-padding-y;
+$input-padding-x:                       $input-btn-padding-x;
+$input-line-height:                     $input-btn-line-height;
+
+$input-color:                           $black;
+$input-border-color:                    $gray-300;
+$input-border-width:                    $input-btn-border-width;
+$input-box-shadow:                      none;
+
+$input-btn-focus-width:       .2rem;
+$input-btn-focus-color:       rgba($input-border-color, .25);
+$input-btn-focus-box-shadow:  0 0 0 $input-btn-focus-width $input-btn-focus-color;
+
+$input-focus-border-color:              $input-border-color;
+$input-focus-box-shadow:                $input-btn-focus-box-shadow;
+$btn-focus-box-shadow:                  $input-btn-focus-box-shadow;
+
+$input-border-radius:                   0;
+
+$input-placeholder-color:               $gray-400;
+
+$custom-select-padding-y:           .5rem;
+$custom-select-padding-x:           .75rem;
+$custom-select-height:              $input-height !default;
+$custom-select-indicator-padding:   .75rem;
+$custom-select-line-height:         $input-btn-line-height;
+$custom-select-color:               $black;
+$custom-select-disabled-color:      $gray-600 !default;
+$custom-select-bg:                  $input-bg !default;
+$custom-select-disabled-bg:         $gray-200 !default;
+$custom-select-bg-size:             8px 10px !default; // In pixels because image dimensions
+$custom-select-indicator-color:     $gray-800 !default;
+$custom-select-indicator:           none;
+$custom-select-border-width:        $input-btn-border-width;
+$custom-select-border-color:        $input-border-color;
+$custom-select-border-radius:       $border-radius;
+$custom-select-box-shadow:          none;
+
+$custom-select-focus-border-color:  $input-focus-border-color;
+$custom-select-focus-width:         $input-btn-focus-width;
+$custom-select-focus-box-shadow:    0 0 0 $custom-select-focus-width rgba($custom-select-focus-border-color, .5);
+
+
+// Navs
+
+$nav-tabs-border-color:             $gray-300;
+$nav-tabs-border-width:             $border-width;
+$nav-tabs-border-radius:            10px;
+$nav-tabs-link-hover-border-color:  transparent;
+$nav-tabs-link-active-color:        $red;
+$nav-tabs-link-active-bg:           transparent;
+$nav-tabs-link-active-border-color: transparent;
