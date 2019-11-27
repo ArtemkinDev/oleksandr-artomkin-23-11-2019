@@ -1,0 +1,22 @@
+<div class="search-holder d-flex justify-content-center">
+    <div class="form-group">
+        <input
+            id="typeahead-http"
+            type="text"
+            class="form-control"
+            [class.is-invalid]="searchFailed"
+            [(ngModel)]="model"
+            [ngbTypeahead]="search"
+            [inputFormatter]="formatter"
+            [resultFormatter]="formatter"
+            (selectItem)="selectedItem($event)"
+            placeholder="Tel Aviv"
+        />
+        <i class="fa fa-search"></i>
+        <i class="fa fa-close"></i>
+        <span *ngIf="searching">searching...</span>
+        <div class="invalid-feedback" *ngIf="searchFailed">
+            Sorry, suggestions could not be loaded.
+        </div>
+    </div>
+</div>

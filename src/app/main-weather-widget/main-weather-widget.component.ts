@@ -7,11 +7,12 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { CityInterface } from "../../common/interfaces/city.interface";
 import { Subscription, combineLatest, Observable } from "rxjs";
 import { CityCurrentConditionModel } from "../../common/models/city-current-condition.model";
+import { CityModel } from "./../../common/models/city.model";
 
 @Component({
     selector: "app-main-weather-widget",
     templateUrl: "./main-weather-widget.component.html",
-    styleUrls: ["./main-weather-widget.component.scss"],
+    styleUrls: ["./main-weather-widget.component.scss"]
 })
 export class MainWeatherWidgetComponent implements OnInit, OnDestroy {
     public weatherServiceSubscription: Subscription;
@@ -30,7 +31,7 @@ export class MainWeatherWidgetComponent implements OnInit, OnDestroy {
         locationKey: "215854",
         temperature: 23.5,
         weatherIcon: "35",
-        weatherText: "Mostly sunny",
+        weatherText: "Mostly sunny"
     };
 
     public defaultDailyForecasts: DayForecastModel[] = [
@@ -38,32 +39,32 @@ export class MainWeatherWidgetComponent implements OnInit, OnDestroy {
             date: "Sun",
             dayIcon: 3,
             nightIcon: 35,
-            temperature: "12.9",
+            temperature: "12.9"
         },
         {
             date: "Mon",
             dayIcon: 3,
             nightIcon: 33,
-            temperature: "17.7",
+            temperature: "17.7"
         },
         {
             date: "Tue",
             dayIcon: 1,
             nightIcon: 33,
-            temperature: "16.5",
+            temperature: "16.5"
         },
         {
             date: "Wed",
             dayIcon: 2,
             nightIcon: 35,
-            temperature: "15.4",
+            temperature: "15.4"
         },
         {
             date: "Thu",
             dayIcon: 14,
             nightIcon: 34,
-            temperature: "14.9",
-        },
+            temperature: "14.9"
+        }
     ];
 
     constructor(
@@ -74,11 +75,8 @@ export class MainWeatherWidgetComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.currentCity = this.state.getCurrentCity();
-        this.getInformationForCurrentDay();
-        // this.currentConditions = this.defaultCurrentConditions;
-        // this.dailyForecasts = this.defaultDailyForecasts;
-        // this.currentConditionsIsLoaded = true;
-        // this.dailyForecastsIsLoaded = true;
+        //this.getInformationForCurrentDay();
+        this.fakeRequest();
     }
 
     public getInformationForCurrentDay() {
@@ -93,8 +91,12 @@ export class MainWeatherWidgetComponent implements OnInit, OnDestroy {
                 this.dailyForecasts = data[1];
                 this.dailyForecastsIsLoaded = true;
 
-                this.currentBg = CommonHelper.getCurrentWeatherBackground(this.currentConditions.weatherIcon);
-                this.favoriteCity = this.userService.checkIfCityInFavourites(this.currentCity);
+                this.currentBg = CommonHelper.getCurrentWeatherBackground(
+                    this.currentConditions.weatherIcon
+                );
+                this.favoriteCity = this.userService.checkIfCityInFavourites(
+                    this.currentCity
+                );
 
                 console.log(this.dailyForecasts);
             },
@@ -107,18 +109,40 @@ export class MainWeatherWidgetComponent implements OnInit, OnDestroy {
     }
 
     public getDailyForecasts(): Observable<DayForecastModel[]> {
-        return this.weatherService.getDailyForecasts(this.currentCity.locationKey);
+        return this.weatherService.getDailyForecasts(
+            this.currentCity.locationKey
+        );
+    }
+
+    public addToFavorite(): void {
+        this.favoriteCity = true;
+        this.userService.updateUserSettingsFavourites(this.currentCity);
+    }
+
+    public selectedNewCity(city: CityModel): void {
+        this.state.setCurrentCity(city);
+        this.currentCity = this.state.getCurrentCity();
+
+        this.getInformationForCurrentDay();
+    }
+
+    // fake data REMOVE ON LIVE
+    public fakeRequest() {
+        this.currentConditions = this.defaultCurrentConditions;
+        this.dailyForecasts = this.defaultDailyForecasts;
+        this.currentConditionsIsLoaded = true;
+        this.dailyForecastsIsLoaded = true;
+        this.currentBg = CommonHelper.getCurrentWeatherBackground(
+            this.currentConditions.weatherIcon
+        );
+        this.favoriteCity = this.userService.checkIfCityInFavourites(
+            this.currentCity
+        );
     }
 
     public ngOnDestroy(): void {
         if (this.weatherServiceSubscription) {
             this.weatherServiceSubscription.unsubscribe();
         }
-    }
-
-    public addToFavorite(locationKey: string): void {
-        this.favoriteCity = true;
-        this.userService.updateUserSettingsFavourites(this.currentCity);
-        console.log(locationKey);
     }
 }

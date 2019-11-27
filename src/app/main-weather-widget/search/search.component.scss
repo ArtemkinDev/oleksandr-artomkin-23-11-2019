@@ -1,0 +1,44 @@
+@import "./../../../styles/base/bootstrap";
+@import "./../../../styles/base/include-media";
+
+:host {
+  display: block;
+
+  .search-holder {
+    width: 100%;
+  }
+
+  .form-group {
+    position: relative;
+    width: 70%;
+
+    .fa {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 10px;
+      font-size: 1rem;
+
+      &-close {
+        left: auto;
+        right: 10px;
+        cursor: pointer;
+
+        @include media("≥tablet") {
+          &:hover {
+            opacity: 0.6;
+          }
+        }
+      }
+    }
+
+    .form-control {
+      padding-left: 35px;
+      padding-right: 35px;
+    }
+  }
+
+  .dropdown-menu {
+    width: 100%;
+  }
+}

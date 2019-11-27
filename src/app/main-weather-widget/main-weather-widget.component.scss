@@ -13,6 +13,8 @@
 
   .container {
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .weather-widget-holder {
@@ -20,6 +22,7 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     overflow: hidden;
     border-radius: 20px;
     box-shadow: -2px 8px 40px rgba(0, 0, 0, 0.3);
