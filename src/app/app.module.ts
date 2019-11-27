@@ -1,6 +1,9 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
+
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppComponent } from "./app.component";
 import { BaseComponent } from "./base/base.component";
@@ -14,6 +17,7 @@ import { MainWeatherWidgetComponent } from "./main-weather-widget/main-weather-w
 import { FavoritesComponent } from "./favorites/favorites.component";
 import { CityCardComponent } from "./favorites/city-card/city-card.component";
 import { CityListComponent } from "./favorites/city-list/city-list.component";
+import { SearchComponent } from "./main-weather-widget/search/search.component";
 
 @NgModule({
     declarations: [
@@ -27,9 +31,16 @@ import { CityListComponent } from "./favorites/city-list/city-list.component";
         FavoritesComponent,
         CityCardComponent,
         CityListComponent,
+        SearchComponent
     ],
-    imports: [BrowserModule, RouterModule.forRoot(ROUTES), HttpClientModule],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot(ROUTES),
+        HttpClientModule,
+        FormsModule,
+        NgbModule
+    ],
     providers: [],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

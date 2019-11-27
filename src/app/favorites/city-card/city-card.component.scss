@@ -1,5 +1,6 @@
 @import "./../../../styles/base/bootstrap";
 @import "./../../../styles/base/include-media";
+@import "./../../../styles/components/animation";
 
 :host {
   display: block;
@@ -12,16 +13,66 @@
   .city-card {
     padding-left: map-get($spacers, 4);
     padding-right: map-get($spacers, 4);
+    animation: fade 0.25s ease-in-out;
   }
+  .card {
+    &-holder {
+      background-color: $cyan;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+      height: 100%;
+      padding: map-get($spacers, 2);
+      border-radius: 20px;
+      box-shadow: -2px 8px 40px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
 
-  .card-holder {
-    background-color: $white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 250px;
-    height: 100%;
-    padding: map-get($spacers, 2);
+      @include media("≥tablet") {
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      &.bg {
+        &--smoke {
+          background-image: url("https://images.unsplash.com/photo-1475778057357-d35f37fa89dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+        }
+        &--clouds {
+          background-image: url("https://images.unsplash.com/photo-1511680321409-d92a85fc4f66?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80");
+        }
+        &--rain {
+          background-image: url("https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80");
+        }
+        &--clear {
+          background-image: url("https://images.unsplash.com/photo-1523733257207-0b1c3aafa441?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
+        }
+        &--mist {
+          background-image: url("https://images.unsplash.com/photo-1546340270-9908deb7b9a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1471&q=80");
+        }
+        &--default {
+          background-color: $cyan;
+        }
+      }
+    }
+    &-top-panel {
+      color: $white;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    &-temp {
+      font-size: 1.5rem;
+    }
+
+    &-content {
+      color: $white;
+      font-size: 0.8rem;
+
+      @include media("≥tablet") {
+        font-size: 1.2rem;
+      }
+    }
   }
 }

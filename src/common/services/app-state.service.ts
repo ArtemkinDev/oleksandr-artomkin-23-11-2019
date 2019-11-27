@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 // import { AppStateModel } from "../models/app-state.model";
 // import { BehaviorSubject, Observable } from "rxjs";
 import { KeyValueInterface } from "../interfaces/key-value.interface";
+import { CityInterface } from "./../interfaces/city.interface";
 
 @Injectable({ providedIn: "root" })
 export class AppStateService {
@@ -18,17 +19,18 @@ export class AppStateService {
         return this.currentCity;
     }
 
-    public setCurrentCity(city: KeyValueInterface<any> = {}): void {
+    public setCurrentCity(city: CityModel): void {
+        const newCurrentCity: CityInterface = { ...city };
         this.currentCity = new CityModel({
-            locationKey: city["Key"],
-            cityName: city["AdministrativeArea"]["LocalizedName"],
+            locationKey: newCurrentCity.locationKey,
+            cityName: newCurrentCity.cityName
         });
     }
 
     public setDefaultCurrentCity(): void {
         this.currentCity = new CityModel({
             locationKey: "215854",
-            cityName: "Tel Aviv",
+            cityName: "Tel Aviv"
         });
     }
 
@@ -39,7 +41,7 @@ export class AppStateService {
                       city =>
                           new CityModel({
                               locationKey: city.locationKey,
-                              cityName: city.locationKey,
+                              cityName: city.cityName
                           })
                   )
                 : [];
@@ -47,7 +49,11 @@ export class AppStateService {
         this.userSettings = new UserSettingsModel({
             temperature: settings.temperature,
             theme: settings.theme,
-            favourites: favourites,
+            favourites: favourites
         });
+    }
+
+    public getUserSettings(): UserSettingsModel {
+        return this.userSettings;
     }
 }

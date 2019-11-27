@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  height: 100%;
+
+  .not-found-block {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("./../../assets/images/not-found-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    color: #fff;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: 5rem;
+  }
+
+  .ideas {
+    .logo-link {
+      color: #fff;
+    }
+  }
+}

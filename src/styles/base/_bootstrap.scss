@@ -1,13 +1,13 @@
 /**
 * Import bootsrap
 */
-@import '~bootstrap/scss/functions';
+@import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 /**
 * Import custom bootsrap variables
 */
-@import './bootstrap-custom';
+@import "./bootstrap-custom";
 
 /**
 * Import needed bootsrap modules
@@ -33,4 +33,4 @@
 @import "~bootstrap/scss/modal";
 @import "~bootstrap/scss/popover";
 @import "~bootstrap/scss/utilities";
-
+@import "~bootstrap/scss/dropdown";
