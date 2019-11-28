@@ -9,15 +9,6 @@ import { map } from "rxjs/operators";
 import { CityInterface } from "../interfaces/city.interface";
 import { CityModel } from "./../models/city.model";
 
-// const WIKI_URL = "https://en.wikipedia.org/w/api.php";
-// const PARAMS = new HttpParams({
-//     fromObject: {
-//         action: "opensearch",
-//         format: "json",
-//         origin: "*"
-//     }
-// });
-
 const fakeResponse = [
     {
         Version: 1,
@@ -26,7 +17,7 @@ const fakeResponse = [
         Rank: 10,
         LocalizedName: "Dhaka",
         Country: { ID: "BD", LocalizedName: "Bangladesh" },
-        AdministrativeArea: { ID: "C", LocalizedName: "Dhaka" }
+        AdministrativeArea: { ID: "C", LocalizedName: "Dhaka" },
     },
     {
         Version: 1,
@@ -35,7 +26,7 @@ const fakeResponse = [
         Rank: 10,
         LocalizedName: "Delhi",
         Country: { ID: "IN", LocalizedName: "India" },
-        AdministrativeArea: { ID: "DL", LocalizedName: "Delhi" }
+        AdministrativeArea: { ID: "DL", LocalizedName: "Delhi" },
     },
     {
         Version: 1,
@@ -44,7 +35,7 @@ const fakeResponse = [
         Rank: 13,
         LocalizedName: "Dongguan",
         Country: { ID: "CN", LocalizedName: "China" },
-        AdministrativeArea: { ID: "GD", LocalizedName: "Guangdong" }
+        AdministrativeArea: { ID: "GD", LocalizedName: "Guangdong" },
     },
     {
         Version: 1,
@@ -53,7 +44,7 @@ const fakeResponse = [
         Rank: 13,
         LocalizedName: "Dalian",
         Country: { ID: "CN", LocalizedName: "China" },
-        AdministrativeArea: { ID: "LN", LocalizedName: "Liaoning" }
+        AdministrativeArea: { ID: "LN", LocalizedName: "Liaoning" },
     },
     {
         Version: 1,
@@ -62,7 +53,7 @@ const fakeResponse = [
         Rank: 13,
         LocalizedName: "Deyang",
         Country: { ID: "CN", LocalizedName: "China" },
-        AdministrativeArea: { ID: "SC", LocalizedName: "Sichuan" }
+        AdministrativeArea: { ID: "SC", LocalizedName: "Sichuan" },
     },
     {
         Version: 1,
@@ -71,7 +62,7 @@ const fakeResponse = [
         Rank: 13,
         LocalizedName: "Dezhou",
         Country: { ID: "CN", LocalizedName: "China" },
-        AdministrativeArea: { ID: "SD", LocalizedName: "Shandong" }
+        AdministrativeArea: { ID: "SD", LocalizedName: "Shandong" },
     },
     {
         Version: 1,
@@ -80,7 +71,7 @@ const fakeResponse = [
         Rank: 13,
         LocalizedName: "Dali Prefecture",
         Country: { ID: "CN", LocalizedName: "China" },
-        AdministrativeArea: { ID: "YN", LocalizedName: "Yunnan" }
+        AdministrativeArea: { ID: "YN", LocalizedName: "Yunnan" },
     },
     {
         Version: 1,
@@ -89,7 +80,7 @@ const fakeResponse = [
         Rank: 15,
         LocalizedName: "Dazhou",
         Country: { ID: "CN", LocalizedName: "China" },
-        AdministrativeArea: { ID: "SC", LocalizedName: "Sichuan" }
+        AdministrativeArea: { ID: "SC", LocalizedName: "Sichuan" },
     },
     {
         Version: 1,
@@ -98,7 +89,7 @@ const fakeResponse = [
         Rank: 15,
         LocalizedName: "Datong",
         Country: { ID: "CN", LocalizedName: "China" },
-        AdministrativeArea: { ID: "SX", LocalizedName: "Shanxi" }
+        AdministrativeArea: { ID: "SX", LocalizedName: "Shanxi" },
     },
     {
         Version: 1,
@@ -107,8 +98,8 @@ const fakeResponse = [
         Rank: 20,
         LocalizedName: "Dakar",
         Country: { ID: "SN", LocalizedName: "Senegal" },
-        AdministrativeArea: { ID: "DK", LocalizedName: "Dakar" }
-    }
+        AdministrativeArea: { ID: "DK", LocalizedName: "Dakar" },
+    },
 ];
 
 @Injectable({ providedIn: "root" })
@@ -117,7 +108,7 @@ export class WeatherService {
     private URL: string = "http://dataservice.accuweather.com/";
     private language: string = "en-us";
     private headers: any = {
-        withCredentials: false
+        withCredentials: false,
     };
 
     constructor(private http: HttpClient) {}
@@ -127,32 +118,24 @@ export class WeatherService {
      * @return { Observable<CityCurrentConditionModel> }
      */
 
-    public getCurrentConditions(
-        city: CityInterface
-    ): Observable<CityCurrentConditionModel> {
-        return Observable.create(
-            (observer: Observer<CityCurrentConditionModel>) => {
-                this.http
-                    .get<KeyValueInterface<any>[]>(
-                        `${this.URL}currentconditions/v1/${city.locationKey}?apikey=${this.API_key}&language=${this.language}&details=true`,
-                        this.headers
-                    )
-                    .subscribe(
-                        (data: KeyValueInterface<any>): void => {
-                            const dataModel: any = new CityCurrentConditionModel(
-                                city,
-                                data[0]
-                            );
+    public getCurrentConditions(city: CityInterface): Observable<CityCurrentConditionModel> {
+        return Observable.create((observer: Observer<CityCurrentConditionModel>) => {
+            this.http
+                .get<KeyValueInterface<any>[]>(
+                    `${this.URL}currentconditions/v1/${city.locationKey}?apikey=${this.API_key}&language=${this.language}&details=true`,
+                    this.headers
+                )
+                .subscribe(
+                    (data: KeyValueInterface<any>): void => {
+                        const dataModel: any = new CityCurrentConditionModel(city, data[0]);
 
-                            observer.next(dataModel);
-                            observer.complete();
-                        },
-                        (error: HttpErrorResponse): void =>
-                            observer.error(error),
-                        (): void => observer.complete()
-                    );
-            }
-        );
+                        observer.next(dataModel);
+                        observer.complete();
+                    },
+                    (error: HttpErrorResponse): void => observer.error(error),
+                    (): void => observer.complete()
+                );
+        });
     }
 
     /**
@@ -160,9 +143,7 @@ export class WeatherService {
      * @return { Observable<CityCurrentConditionModel> }
      */
 
-    public getDailyForecasts(
-        locationKey: string
-    ): Observable<DayForecastModel[]> {
+    public getDailyForecasts(locationKey: string): Observable<DayForecastModel[]> {
         return Observable.create((observer: Observer<DayForecastModel[]>) => {
             this.http
                 .get<KeyValueInterface<any>[]>(
@@ -171,11 +152,8 @@ export class WeatherService {
                 )
                 .subscribe(
                     (data: KeyValueInterface<any>): void => {
-                        const dataModel: DayForecastModel[] = data[
-                            "DailyForecasts"
-                        ].map(
-                            (d: KeyValueInterface<any>): DayForecastModel =>
-                                CommonHelper.createDayForecastModel(d)
+                        const dataModel: DayForecastModel[] = data["DailyForecasts"].map(
+                            (d: KeyValueInterface<any>): DayForecastModel => CommonHelper.createDayForecastModel(d)
                         );
 
                         observer.next(dataModel);
@@ -202,7 +180,7 @@ export class WeatherService {
                         city =>
                             new CityModel({
                                 locationKey: city.Key,
-                                cityName: city.LocalizedName
+                                cityName: city.LocalizedName,
                             })
                     )
                 )
@@ -218,7 +196,7 @@ export class WeatherService {
                     city =>
                         new CityModel({
                             locationKey: city.Key,
-                            cityName: city.LocalizedName
+                            cityName: city.LocalizedName,
                         })
                 )
             );
