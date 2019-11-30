@@ -1,1 +1,4 @@
-<app-city-list></app-city-list>
+<app-city-list *ngIf="favoriteCities.length" [favoriteCities]="favoriteCities"></app-city-list>
+<p *ngIf="favoriteCities.length === 0" class="text-center font-weight-bold">
+    There are no cities in your favorites list!
+</p>

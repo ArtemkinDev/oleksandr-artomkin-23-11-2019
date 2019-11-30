@@ -75,8 +75,8 @@ export class MainWeatherWidgetComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.currentCity = this.state.getCurrentCity();
-        //this.getInformationForCurrentDay();
-        this.fakeRequest();
+        this.getInformationForCurrentDay();
+        //this.fakeRequest();
         console.log(this.state.getUserSettings());
     }
 
@@ -110,7 +110,7 @@ export class MainWeatherWidgetComponent implements OnInit, OnDestroy {
     }
 
     public addToFavorite(): void {
-        this.favoriteCity = true;
+        this.favoriteCity = !this.favoriteCity;
         this.userService.updateUserSettingsFavourites(this.currentCity);
     }
 
@@ -118,8 +118,8 @@ export class MainWeatherWidgetComponent implements OnInit, OnDestroy {
         this.state.setCurrentCity(city);
         this.currentCity = this.state.getCurrentCity();
 
-        //this.getInformationForCurrentDay();
-        this.fakeRequest();
+        this.getInformationForCurrentDay();
+        //this.fakeRequest();
     }
 
     // fake data REMOVE ON LIVE

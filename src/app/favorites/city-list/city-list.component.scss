@@ -1,14 +1,14 @@
 @import "./../../../styles/base/bootstrap";
-@import "./../../../styles/base/include-media";
+@import "./../../../styles/styles.scss";
 
 :host {
   display: block;
   .city-list {
     display: block;
 
-    @include media("≥tablet") {
+    @include media("≥phone") {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
     }
   }
 }

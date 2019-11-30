@@ -13,8 +13,8 @@
             placeholder="Tel Aviv"
         />
         <i class="fa fa-search"></i>
-        <i class="fa fa-close"></i>
-        <span *ngIf="searching">searching...</span>
+        <i class="fa fa-close" *ngIf="model" (click)="clearInput()"></i>
+        <span *ngIf="searching" class="searching">searching...</span>
         <div class="invalid-feedback" *ngIf="searchFailed">
             Sorry, suggestions could not be loaded.
         </div>

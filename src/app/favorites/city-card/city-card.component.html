@@ -1,11 +1,11 @@
-<div class="city-card">
-    <div class="card-holder">
+<div class="city-card" (click)="showMoreDetailsAboutCity(city)">
+    <div [class]="'card-holder bg--' + currentBg">
         <div class="card-top-panel">
-            <h3 class="card-name">{{ city.name }}</h3>
-            <div class="card-temp">{{ city.temp }} &deg;</div>
+            <h3 class="card-name">{{ city.cityName }}</h3>
+            <div class="card-temp">{{ city.temperature }} &deg;</div>
         </div>
         <div class="card-content">
-            {{ city.desc }}
+            {{ city.weatherText }}
         </div>
     </div>
 </div>

@@ -1,13 +1,21 @@
 @import "./../../../styles/base/bootstrap";
-@import "./../../../styles/base/include-media";
+@import "./../../../styles/styles.scss";
 @import "./../../../styles/components/animation";
 
 :host {
   display: block;
+  margin-bottom: map-get($spacers, 4);
+
+  @include media("≥phone") {
+    flex-basis: 50%;
+  }
 
   @include media("≥tablet") {
-    flex-grow: 1;
-    flex-basis: 0;
+    flex-basis: 33.333%;
+  }
+
+  @include media("≥desktop") {
+    flex-basis: 20%;
   }
 
   .city-card {
@@ -17,6 +25,7 @@
   }
   .card {
     &-holder {
+      position: relative;
       background-color: $cyan;
       display: flex;
       flex-direction: column;
@@ -28,11 +37,22 @@
       border-radius: 20px;
       box-shadow: -2px 8px 40px rgba(0, 0, 0, 0.3);
       cursor: pointer;
+      overflow: hidden;
 
       @include media("≥tablet") {
         &:hover {
           opacity: 0.8;
         }
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(25, 80, 230, 0.2);
       }
 
       &.bg {
@@ -56,10 +76,13 @@
         }
       }
     }
+
     &-top-panel {
+      position: relative;
       color: $white;
       text-align: center;
       margin-bottom: 25px;
+      z-index: 1;
     }
 
     &-temp {
@@ -67,8 +90,10 @@
     }
 
     &-content {
+      position: relative;
       color: $white;
       font-size: 0.8rem;
+      z-index: 1;
 
       @include media("≥tablet") {
         font-size: 1.2rem;

@@ -1,7 +1,12 @@
 @import "./../../styles/base/bootstrap";
+@import "./../../styles/base/include-media";
+@import "./../../styles/styles.scss";
 
 :host {
   display: block;
-  padding-left: map-get($spacers, 5);
-  padding-right: map-get($spacers, 5);
+
+  @include media("≥desktop") {
+    padding-left: map-get($spacers, 5);
+    padding-right: map-get($spacers, 5);
+  }
 }

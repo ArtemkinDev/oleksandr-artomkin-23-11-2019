@@ -1,9 +1,23 @@
+import { CityCurrentConditionModel } from "./../../common/models/city-current-condition.model";
 import { WeatherService } from "./../../common/services/weather.service";
 import { AppStateService } from "./../../common/services/app-state.service";
 import { Component, Input, OnDestroy } from "@angular/core";
-import { Subscription, combineLatest } from "rxjs";
+import { Subscription, of, Observable, forkJoin } from "rxjs";
+import { map, delay, catchError } from "rxjs/operators";
 
 import { CityModel } from "../../common/models/city.model";
+
+function mockHTTPRequest(url): Observable<string> {
+    return of(`Response from ${url}`).pipe(
+        delay(Math.random() * 1000),
+        map(value => {
+            if (url === "url-3") {
+                throw new Error(`Error response from ${url}`);
+            }
+            return value;
+        })
+    );
+}
 
 @Component({
     selector: "app-favorites",
@@ -11,7 +25,6 @@ import { CityModel } from "../../common/models/city.model";
     styleUrls: ["./favorites.component.scss"],
 })
 export class FavoritesComponent implements OnDestroy {
-    @Input()
     public favoriteCities: CityModel[] = [];
 
     public weatherServiceSubscription: Subscription;
@@ -27,19 +40,16 @@ export class FavoritesComponent implements OnDestroy {
             return;
         }
 
-        this.weatherServiceSubscription = combineLatest(
-            favoriteCity.map(c => {
-                this.weatherService.getCurrentConditions(c);
-            })
-        ).subscribe(
-            data => {
-                data.forEach(item => {
-                    //let i = index;
+        const observables = favoriteCity.map(city =>
+            this.weatherService.getCurrentConditions(city).pipe(catchError(() => of(null)))
+        );
 
-                    console.log(item);
-
-                    // this.favoriteCities.push(data[i]);
+        this.weatherServiceSubscription = forkJoin(observables).subscribe(
+            (data: CityCurrentConditionModel[]): void => {
+                const citiesArray = data.filter(c => {
+                    return c;
                 });
+                this.favoriteCities = [...citiesArray];
             },
             error => console.log(error)
         );

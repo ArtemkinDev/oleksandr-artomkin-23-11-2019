@@ -1,23 +1,17 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { WeatherService } from "./../../../common/services/weather.service";
 import { Observable, of } from "rxjs";
-import {
-    catchError,
-    debounceTime,
-    distinctUntilChanged,
-    tap,
-    switchMap
-} from "rxjs/operators";
+import { catchError, debounceTime, distinctUntilChanged, tap, switchMap } from "rxjs/operators";
 import { CityModel } from "./../../../common/models/city.model";
 import { NgbTypeaheadSelectItemEvent } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: "app-search",
     templateUrl: "./search.component.html",
-    styleUrls: ["./search.component.scss"]
+    styleUrls: ["./search.component.scss"],
 })
 export class SearchComponent {
-    public model: CityModel;
+    public model: string;
     public searching: boolean = false;
     public searchFailed: boolean = false;
     @Output()
@@ -33,7 +27,7 @@ export class SearchComponent {
             distinctUntilChanged(),
             tap(() => (this.searching = true)),
             switchMap(term =>
-                this.weatherService.fakeSearch(term).pipe(
+                this.weatherService.search(term).pipe(
                     tap(() => (this.searchFailed = false)),
                     catchError(() => {
                         this.searchFailed = true;
@@ -46,5 +40,9 @@ export class SearchComponent {
 
     public selectedItem(item: NgbTypeaheadSelectItemEvent): void {
         this.clickedCity.emit(item.item);
+    }
+
+    public clearInput(): void {
+        this.model = "";
     }
 }

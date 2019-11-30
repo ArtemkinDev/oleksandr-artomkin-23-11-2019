@@ -12,13 +12,10 @@ export class UserService {
     private defaultUserSettings: KeyValueInterface<any> = {
         temperature: "c",
         theme: "light",
-        favourites: []
+        favourites: [],
     };
 
-    constructor(
-        private localstorage: LocalstorageService,
-        private appState: AppStateService
-    ) {}
+    constructor(private localstorage: LocalstorageService, private appState: AppStateService) {}
 
     // private updateLocalStorage(users: UserModel[]): void {
     //     const usersParse = users.map<KeyValueInterface<any>>((u: UserModel) => UserHelper.CreateObjectFromClass(u));
@@ -36,9 +33,7 @@ export class UserService {
     }
 
     public updateUserSettingsTheme(value: string): void {
-        const prevSettings: KeyValueInterface<any> = this.localstorage.get(
-            "userSettings"
-        );
+        const prevSettings: KeyValueInterface<any> = this.localstorage.get("userSettings");
         const newSettings: KeyValueInterface<any> = {};
         if (prevSettings.theme === value) {
             return;
@@ -52,34 +47,27 @@ export class UserService {
     }
 
     public updateUserSettingsFavourites(value): void {
-        const prevSettings: KeyValueInterface<any> = this.localstorage.get(
-            "userSettings"
-        );
+        const prevSettings: KeyValueInterface<any> = this.localstorage.get("userSettings");
         const newSettings: KeyValueInterface<any> = {};
-        const checkIfCityInFavorite = prevSettings.favourites.find(
-            c => c.locationKey === value.locationKey
-        );
+        const checkIfCityInFavoriteIndex = prevSettings.favourites.findIndex(c => c.locationKey === value.locationKey);
 
-        if (checkIfCityInFavorite) {
-            return;
+        if (checkIfCityInFavoriteIndex > -1) {
+            prevSettings.favourites.splice(checkIfCityInFavoriteIndex, 1);
+        } else {
+            prevSettings.favourites.push(value);
         }
+
         newSettings.temperature = prevSettings.temperature;
         newSettings.favourites = prevSettings.favourites;
         newSettings.theme = prevSettings.theme;
-
-        newSettings.favourites.push(value);
 
         this.localstorage.set("userSettings", newSettings);
         this.appState.setUserSettings(newSettings);
     }
 
     public checkIfCityInFavourites(city: CityModel): boolean {
-        const prevSettings: KeyValueInterface<any> = this.localstorage.get(
-            "userSettings"
-        );
-        const checkIfCityInFavorite = prevSettings.favourites.find(
-            c => c.locationKey === city.locationKey
-        );
+        const prevSettings: KeyValueInterface<any> = this.localstorage.get("userSettings");
+        const checkIfCityInFavorite = prevSettings.favourites.find(c => c.locationKey === city.locationKey);
 
         return !!checkIfCityInFavorite;
     }
