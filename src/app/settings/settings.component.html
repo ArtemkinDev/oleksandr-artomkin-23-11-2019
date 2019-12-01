@@ -1,0 +1,39 @@
+<div class="container">
+    <h3>User settings:</h3>
+    <h4>Theme:</h4>
+    <div class="settings-container">
+        <div class="settings-radio" *ngFor="let theme of themes">
+            <input
+                type="radio"
+                class="settings-btn"
+                [id]="theme + '-theme'"
+                name="theme"
+                [checked]="theme === currentTheme"
+            />
+            <label
+                class="settings-label btn btn-outline-primary"
+                [for]="theme + '-theme'"
+                (click)="changeTheme(theme)"
+                >{{ theme }}</label
+            >
+        </div>
+    </div>
+    <h4>Temperature:</h4>
+    <div class="settings-container">
+        <div class="settings-radio" *ngFor="let temperature of temperatures">
+            <input
+                type="radio"
+                class="settings-btn"
+                [id]="temperature"
+                name="temperatur"
+                [checked]="temperature === currentTemperature"
+            />
+            <label
+                class="settings-label btn btn-outline-primary"
+                [for]="temperature"
+                (click)="changeTemperature(temperature)"
+                >{{ temperature }}</label
+            >
+        </div>
+    </div>
+</div>

@@ -27,7 +27,7 @@ export class SearchComponent {
             distinctUntilChanged(),
             tap(() => (this.searching = true)),
             switchMap(term =>
-                this.weatherService.search(term).pipe(
+                this.weatherService.fakeSearch(term).pipe(
                     tap(() => (this.searchFailed = false)),
                     catchError(() => {
                         this.searchFailed = true;

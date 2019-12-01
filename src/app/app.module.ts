@@ -18,6 +18,7 @@ import { FavoritesComponent } from "./favorites/favorites.component";
 import { CityCardComponent } from "./favorites/city-card/city-card.component";
 import { CityListComponent } from "./favorites/city-list/city-list.component";
 import { SearchComponent } from "./main-weather-widget/search/search.component";
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import { SearchComponent } from "./main-weather-widget/search/search.component";
         FavoritesComponent,
         CityCardComponent,
         CityListComponent,
-        SearchComponent
+        SearchComponent,
+        SettingsComponent
     ],
     imports: [
         BrowserModule,

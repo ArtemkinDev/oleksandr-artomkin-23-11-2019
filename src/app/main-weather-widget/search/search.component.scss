@@ -35,10 +35,23 @@
     .form-control {
       padding-left: 35px;
       padding-right: 35px;
+
+      &.is-invalid {
+        background: #fff;
+      }
     }
 
     .searching {
       display: none;
+    }
+
+    .invalid-feedback {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      padding: 5px 10px;
+      z-index: 2;
     }
   }
 

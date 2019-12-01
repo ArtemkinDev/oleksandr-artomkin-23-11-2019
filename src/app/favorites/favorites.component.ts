@@ -1,23 +1,11 @@
 import { CityCurrentConditionModel } from "./../../common/models/city-current-condition.model";
 import { WeatherService } from "./../../common/services/weather.service";
 import { AppStateService } from "./../../common/services/app-state.service";
-import { Component, Input, OnDestroy } from "@angular/core";
-import { Subscription, of, Observable, forkJoin } from "rxjs";
-import { map, delay, catchError } from "rxjs/operators";
+import { Component, OnDestroy } from "@angular/core";
+import { Subscription, of, forkJoin } from "rxjs";
+import { catchError } from "rxjs/operators";
 
 import { CityModel } from "../../common/models/city.model";
-
-function mockHTTPRequest(url): Observable<string> {
-    return of(`Response from ${url}`).pipe(
-        delay(Math.random() * 1000),
-        map(value => {
-            if (url === "url-3") {
-                throw new Error(`Error response from ${url}`);
-            }
-            return value;
-        })
-    );
-}
 
 @Component({
     selector: "app-favorites",

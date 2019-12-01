@@ -1,6 +1,6 @@
 import { AppStateService } from "./../../../common/services/app-state.service";
 import { CityModel } from "./../../../common/models/city.model";
-import { CommonHelper } from "./../../../common/helpers/common.helper";
+import { WeatherHelper } from "./../../../common/helpers/weather.helper";
 import { CityCurrentConditionModel } from "./../../../common/models/city-current-condition.model";
 import { Component, OnInit, Input } from "@angular/core";
 import { Router } from "@angular/router";
@@ -18,7 +18,7 @@ export class CityCardComponent implements OnInit {
     constructor(private state: AppStateService, private router: Router) {}
 
     public ngOnInit() {
-        this.currentBg = CommonHelper.getCurrentWeatherBackground(this.city.weatherIcon);
+        this.currentBg = WeatherHelper.getCurrentWeatherBackground(this.city.weatherIcon);
     }
 
     public showMoreDetailsAboutCity(city: CityCurrentConditionModel) {

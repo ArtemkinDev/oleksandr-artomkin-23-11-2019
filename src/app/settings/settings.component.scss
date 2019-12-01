@@ -1,0 +1,37 @@
+@import "./../../styles/base/bootstrap";
+@import "./../../styles/base/include-media";
+
+:host {
+  display: block;
+
+  .settings {
+    &-container {
+      margin-left: -10px;
+      margin-right: -10px;
+      display: flex;
+    }
+
+    &-radio {
+      position: relative;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    &-btn {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      visibility: hidden;
+
+      &:checked + .settings-label {
+        background-color: $primary;
+        color: $white;
+      }
+    }
+
+    &-label {
+      cursor: pointer;
+      text-transform: capitalize;
+    }
+  }
+}
